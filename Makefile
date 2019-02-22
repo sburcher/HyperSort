@@ -2,12 +2,14 @@
 # Made 11/28/2017
 # Sean Burcher
 # Adapted from Makefile for his2root by Cory Thornsberry
-
 ##################################################################
 
 CC=g++
 
-CFLAGS = -fPIC -Wall -O3 -std=c++0x `root-config --cflags` -Iinclude 
+#CFLAGS = -Wno-unused-variable -fPIC -Wall -O3 -std=c++0x `root-config --cflags` -Iinclude 
+
+#CFLAGS = -fPIC -Wall -O3 -std=c++0x `root-config --cflags` -Iinclude 
+CFLAGS = -fPIC -Wall -g -std=c++0x `root-config --cflags` -Iinclude 
 LDLIBS = -lstdc++ `root-config --libs` 
 LDFLAGS = `root-config --glibs`
 
@@ -21,10 +23,15 @@ OBJ_DIR = $(TOP_LEVEL)/obj
 INSTALL_DIR = ~/bin
 
 # Executables
-SORT = sort
-SORT_SRC = $(SOURCE_DIR)/sort.cpp
-SORT_OBJ = $(OBJ_DIR)/sort.o
+SORT = Sort
+SORT_SRC = $(SOURCE_DIR)/Sort.cpp
+SORT_OBJ = $(OBJ_DIR)/Sort.o
 
+# C++ CORE
+SOURCES = ParticleHit.cpp CloverArray.cpp LeafArray.cpp ProcessSilicon.cpp ProcessClovers.cpp Utility.cpp
+
+# C++ object files
+OBJECTS = $(addprefix $(OBJ_DIR)/,$(SOURCES:.cpp=.o))
 
 #####################################################################
 
@@ -67,3 +74,9 @@ tidy: clean
 
 clean:
 	@rm -f $(OBJ_DIR)/*.o
+
+
+
+
+
+
